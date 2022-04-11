@@ -84,18 +84,9 @@ class MulticamCalibrationGraph(object):
 #############################################################    
     #check if all cams are connected through observations
     def isGraphConnected(self):
-        # #check if all vertices are connected
-        # return self.G.adhesion()
+        #check if all vertices are connected
+        return self.G.adhesion()
         
-        # https://github.com/ethz-asl/kalibr/issues/364
-        if self.numCams == 1:
-            # Since igaph 0.8, adhesion correctly returns 0 for the non-connected one cam case.
-            #   which evaluates to false later on. So we skip the check and return true in the one camera case.
-            return True
-        else:
-            #check if all vertices are connected
-            return self.G.adhesion()
-
     #returns the list of cam_ids that share common view with the specified cam_id
     def getCamOverlaps(self, cam_id):
         overlap_vertices=self.G.vs[cam_id].neighbors()
